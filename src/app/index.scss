@@ -96,3 +96,97 @@ section.jumbotron {
  */
 // injector
 // endinjector
+
+
+#loginFormContainer {
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.errorMessage{
+     color: rgb(244,67,54);
+      font-size: 12px;
+      line-height: 14px;
+      padding-top: 5px;
+      text-align:center;
+
+}
+
+.mainButtons {
+  display: flex;
+  width: 50%;
+  md-card {
+    display: block;
+    width: 45%;
+    min-height: 347px;
+    md-card-content{
+          padding-top: 0px;
+          padding-bottom: 0px;
+          display: block;
+    }
+  }
+}
+
+.mainContent{
+  display: flex;
+}
+
+
+
+.mainTeams{
+  width: 30%;
+}
+
+
+.mainTeams > md-list > md-list-item{
+  background-color: #f76a65;
+  border-style: double;
+  border-color: white;
+}
+
+.mainTeams > md-list > md-list-item:hover{
+  background-color: #ECFAFB;
+}
+
+.teamSelected {
+  background-color: #B2EBFF !important;
+  border-radius: 2px; 
+  }
+
+
+@media screen and (max-width: 768px) {
+    .mainButtons {
+      width: 100%;
+    }
+
+    .mainButtons md-card {
+     width: 45%;
+     text-align: center;
+     min-height: 0px;
+     md-card-content .md-title{
+      font-size: 12px;
+     }
+
+    }    
+
+    .mainTeams{
+      width: 100%;
+    }
+
+    .mainButtons md-card md-card-content{
+      padding: 0px;
+
+    }
+
+    .mainButtons md-card md-card-content p {
+      display: none;
+    }
+
+    .mainContent{
+      display: block;
+    }
+
+
+
+}

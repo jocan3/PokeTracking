@@ -1,0 +1,28 @@
+<md-toolbar>
+     <div class="md-toolbar-tools">
+        <span><img src="app/components/images/logo/white.png" height="40" width="40"></span>
+          <h1>
+            <span>&nbspPokeTracker</span>
+          </h1>
+          <span flex></span>
+          <md-menu md-position-mode="target-right target" >
+              <md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu($event)">
+                <md-icon md-svg-icon="app/components/images/icons/more_vert.svg"></md-icon>
+              </md-button>
+              <md-menu-content>
+            <md-menu-item>
+              <md-button>
+                  <md-icon md-svg-icon="app/components/images/icons/help.svg"></md-icon>
+                  About
+              </md-button>
+            </md-menu-item>
+            <md-menu-item id="logoutItem" ng-if="menu.showLogout">
+              <md-button ng-click="menu.logout()">
+              <md-icon md-svg-icon="app/components/images/icons/power_off.svg"></md-icon>
+                  Logout
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+          </md-menu>
+        </div>
+      </md-toolbar>

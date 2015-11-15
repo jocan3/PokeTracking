@@ -1,34 +1,52 @@
-<div layout="vertical" layout-fill>
+<menu-dir></menu-dir>
+<div class="mainContent" layout-align="center">
 
-  <md-content>
-    <header>
-      <acme-navbar creation-date="main.creationDate"></acme-navbar>
-    </header>
+ <md-content class="mainButtons" layout-align="left">
+<md-card>
+  <img ng-src="app/components/images/vgc_2015_battle.jpg" alt="vgc_2015_battle"  class="md-card-image">
+  <md-card-content>
+          <h4 class="md-title">Track your battles!</h4>
+          <p>Record the results of your VGC battles with you favorite teams</p>
+  </md-card-content>
+</md-card> 
+<md-card>
+  <img ng-src="app/components/images/pokedex.png" alt="pokedex"  class="md-card-image">
+  <md-card-content>
+          <h4 class="md-title">Use your statistics</h4>
+          <p>Get recommendations for your VGC battles based on your historical records</p>
+  </md-card-content>
+</md-card> 
+</md-content>
 
-    <section class="jumbotron">
-      <h1>'Allo, 'Allo!</h1>
-      <p class="lead">
-        <img src="assets/images/yeoman.png" alt="I'm Yeoman"><br>
-        Always a pleasure scaffolding your apps.
-      </p>
-      <md-button class="md-raised animated infinite" ng-class="main.classAnimation" ng-click="main.showToastr()">Splendid Toastr</md-button>
-      <p>
-        With ♥ thanks to the contributions of<acme-malarkey extra-values="['Yeoman', 'Gulp', 'Angular']"></acme-malarkey>
-      </p>
-    </section>
 
-    <div class="techs" layout-align="center">
-      <md-card ng-repeat="awesomeThing in main.awesomeThings | orderBy:'rank'">
-        <md-card-content>
-          <img class="pull-right" ng-src="assets/images/{{ awesomeThing.logo }}" alt="{{ awesomeThing.title }}">
-          <h3 class="md-title">{{ awesomeThing.title }}</h3>
-          <p>{{ awesomeThing.description }}</p>
-        </md-card-content>
-        <div class="md-action-buttons">
-          <md-button ng-href="{{ awesomeThing.url }}">Website</md-button>
+
+ <md-content class="mainTeams" layout-align="center">
+    <md-subheader class="md-primary">My teams</md-subheader>
+    <md-divider></md-divider>
+    <!--md-radio-group ng-model="main.selectedTeam" >
+      <div ng-repeat='team in main.Teams' class="md-3-line" >
+        <div flex layout='row' layout-align="start center" >
+          <md-radio-button flex
+              aria-label="team.team_id"
+              ng-value="team.team_id"
+              class="md-primary" >
+          </md-radio-button>
+        
+            <img ng-repeat="pokemon in team.team" ng-src="{{pokemon.sprite}}" class="md-avatar" alt="{{pokemon.name}}">  
         </div>
-      </md-card>
-    </div>
-  </md-content>
+      </div>
+    </md-radio-group-->
+
+<md-list>
+      <md-list-item class="md-3-line" ng-class="{'teamSelected' : main.SelectedTeam == team.team_id}"  ng-repeat="team in main.Teams" ng-click="main.selectTeam(team.team_id)" aria-label="team.team_id">
+         <img ng-repeat="pokemon in team.team" ng-src="{{pokemon.sprite}}" class="md-avatar" alt="{{pokemon.name}}">  
+      </md-list-item>
+      <md-divider ></md-divider>
+
+    <md-divider></md-divider>
+</md-list>
+
+</md-content>
+
 
 </div>

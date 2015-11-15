@@ -6,8 +6,9 @@
     .config(config);
 
   /** @ngInject */
-  function config($logProvider, toastrConfig) {
+  function config($logProvider, toastrConfig,$mdThemingProvider) {
     // Enable log
+     $mdThemingProvider.theme('altTheme');
     $logProvider.debugEnabled(true);
 
     // Set options third-party lib

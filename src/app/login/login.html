@@ -1,0 +1,34 @@
+<menu-dir></menu-dir>
+<md-content layout-padding id="loginFormContainer">
+<form name="loginForm">
+ <md-input-container class="md-block">
+        <label>Username</label>
+        <input required name="username" ng-model="login.username" ng-minlength="4" ng-maxlength="30">
+        <div ng-messages="loginForm.username.$error">
+           <div ng-message="maxlength">The value has to be less than 30 characters long.</div>
+          <div ng-message="minlength">The value has to be more than 4 characters long.</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container class="md-block">
+        <label>Password</label>
+        <input required name="password" ng-model="login.password" type='password' ng-minlength="4" ng-maxlength="30">
+        <div ng-messages="loginForm.password.$error">
+          <div ng-message="maxlength">The value has to be less than 30 characters long.</div>
+          <div ng-message="minlength">The value has to be more than 4 characters long.</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container class="md-block">
+      	<md-button class="md-primary md-raised" ng-click="login.signIn()" ng-disabled="!loginForm.$valid">Sign in</md-button>
+      	<div ng-if="login.resultLogin.status == 'error'" class="errorMessage">{{login.resultLogin.msg}}</div>
+      </md-input-container>
+      <md-input-container class="md-block">
+      	<md-button class="md-raised" ng-click="login.createAccount()" ng-disabled="!loginForm.$valid">Create account</md-button>
+      	
+          <div ng-if="login.resultCreate.status == 'error'" class="errorMessage">{{login.resultCreate.msg}}</div>
+        </div>
+      
+</form>
+
+</md-content>
