@@ -38,14 +38,18 @@
     </md-radio-group-->
 
 <md-list>
-      <md-list-item class="md-3-line" ng-class="{'teamSelected' : main.SelectedTeam == team.team_id}"  ng-repeat="team in main.Teams" ng-click="main.selectTeam(team.team_id)" aria-label="team.team_id">
-         <img ng-repeat="pokemon in team.team" ng-src="{{pokemon.sprite}}" class="md-avatar" alt="{{pokemon.name}}">  
+      <md-list-item class="md-3-line" ng-class="{'teamSelected' : main.SelectedTeam == team.team_id}"  ng-repeat="team in main.Teams" ng-click="main.selectTeam(team.team_id)" aria-label="team_$index">
+         <img class="pokeImg" ng-repeat="pokemon in team" ng-src="{{pokemon.sprite}}" class="md-avatar" alt="{{pokemon.name}}">  
       </md-list-item>
       <md-divider ></md-divider>
 
     <md-divider></md-divider>
-</md-list>
 
+</md-list>
+<nav mfb-menu position="br" effect="zoomin" label="Add a new team"
+     active-icon="ion-plus-round" resting-icon="ion-plus-round"
+     toggling-method="click" ng-click="main.addNewTeam()">
+</nav>
 </md-content>
 
 

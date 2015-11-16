@@ -1,1 +1,1 @@
-xcopy "poketracker" "c:\xampp\htdocs" /E /I /H /R /Y
+xcopy "poketracker" "c:\xampp\htdocs\poketracker" /E /I /H /R /Y

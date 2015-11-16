@@ -12,18 +12,33 @@
 
     var service = {
       apiHost: apiHost,
-      getUser: getUser,
       createAccount: createAccount,
-      login: login
+      login: login,
+      getTeams: getTeams,
+      createTeam : createTeam,
+      insertInTeam : insertInTeam
+
       //getTeams: getTeams,
       //getStatistics: getStatistics
     };
 
     return service;
 
-    function getUser(username,password) {
-      return $http.get(apiHost + '/'+username+'_profile.txt');
+    function insertInTeam(teamId, pokemonId){
+      return $http.get(baseURL + 'insertInTeam/'+teamId + '/' + pokemonId);  
     }
+
+    function createTeam(username){
+      console.log('database create team');
+      console.log(baseURL + 'createTeam/'+username);
+      return $http.get(baseURL + 'createTeam/'+username);
+    }
+
+
+    function getTeams(username){
+      return $http.get(baseURL + 'teams/'+username);
+    }
+
 
     function createAccount(username, password){
       console.log('creating account in db: ' + baseURL + 'signup');

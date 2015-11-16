@@ -17,6 +17,11 @@
         controller: 'LoginController',
         controllerAs: 'login'
       })
+      .when('/new', {
+        templateUrl: 'app/new/new.html',
+        controller: 'NewController',
+        controllerAs: 'new'
+      })
       .when('/test', {
         templateUrl: 'app/test/test.html',
         controller: 'TestController',

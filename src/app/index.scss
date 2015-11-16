@@ -115,7 +115,7 @@ section.jumbotron {
 
 .mainButtons {
   display: flex;
-  width: 50%;
+  width: 60%;
   md-card {
     display: block;
     width: 45%;
@@ -135,24 +135,32 @@ section.jumbotron {
 
 
 .mainTeams{
-  width: 30%;
+  width: 40%;
+  max-height: 35em;
+  overflow-x:hidden;
+  overflow-y:scroll;
 }
 
-
-.mainTeams > md-list > md-list-item{
-  background-color: #f76a65;
+.pokeImg {
+  /*background-color: #f76a65;*/
+  background-image: url("components/images/logo/blue2.png");
   border-style: double;
   border-color: white;
-}
+  background-size:100%;
+  width: 15%;
+  height: 15%
+ }
+
+
 
 .mainTeams > md-list > md-list-item:hover{
   background-color: #ECFAFB;
 }
-
+/*
 .teamSelected {
   background-color: #B2EBFF !important;
   border-radius: 2px; 
-  }
+  }*/
 
 
 @media screen and (max-width: 768px) {

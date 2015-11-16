@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, $cookies, $location, database) {
+  function MainController($timeout, $cookies, $location, database, pokeapi) {
     var vm = this;
 
     vm.awesomeThings = [];
@@ -17,69 +17,25 @@
 
    
 
-    vm.Teams = [{
-        "team_id" : "1",
-        "team" : [
-           { "sprite" : "http://pokeapi.co/media/img/1383571573.78.png", "name" : "Bulbasaur"},
-           { "sprite" : "http://pokeapi.co/media/img/24.png", "name" : "Arbok"},
-           { "sprite" : "http://pokeapi.co/media/img/1383571573.78.png", "name" : "Bulbasaur"},
-           { "sprite" : "http://pokeapi.co/media/img/1383571573.78.png", "name" : "Bulbasaur"},
-           { "sprite" : "http://pokeapi.co/media/img/24.png", "name" : "Arbok"},
-           { "sprite" : "http://pokeapi.co/media/img/1383571573.78.png", "name" : "Bulbasaur"}
-        ]}
-      ,
-      {
-        "team_id" : "2",
-        "team" : [
-           { "sprite" : "http://pokeapi.co/media/img/1383571573.78.png", "name" : "Bulbasaur"},
-           { "sprite" : "http://pokeapi.co/media/img/24.png", "name" : "Arbok"},
-           { "sprite" : "http://pokeapi.co/media/img/1383571573.78.png", "name" : "Bulbasaur"},
-           { "sprite" : "http://pokeapi.co/media/img/1383571573.78.png", "name" : "Bulbasaur"},
-           { "sprite" : "http://pokeapi.co/media/img/24.png", "name" : "Arbok"},
-           { "sprite" : "http://pokeapi.co/media/img/1383571573.78.png", "name" : "Bulbasaur"}
-        ]},
-        {
-        "team_id" : "3",
-        "team" : [
-           { "sprite" : "http://pokeapi.co/media/img/1383571573.78.png", "name" : "Bulbasaur"},
-           { "sprite" : "http://pokeapi.co/media/img/24.png", "name" : "Arbok"},
-           { "sprite" : "http://pokeapi.co/media/img/1383571573.78.png", "name" : "Bulbasaur"},
-           { "sprite" : "http://pokeapi.co/media/img/1383571573.78.png", "name" : "Bulbasaur"},
-           { "sprite" : "http://pokeapi.co/media/img/24.png", "name" : "Arbok"},
-           { "sprite" : "http://pokeapi.co/media/img/1383571573.78.png", "name" : "Bulbasaur"}
-        ]},
-        {
-        "team_id" : "4",
-        "team" : [
-           { "sprite" : "http://pokeapi.co/media/img/1383571573.78.png", "name" : "Bulbasaur"},
-           { "sprite" : "http://pokeapi.co/media/img/24.png", "name" : "Arbok"},
-           { "sprite" : "http://pokeapi.co/media/img/1383571573.78.png", "name" : "Bulbasaur"},
-           { "sprite" : "http://pokeapi.co/media/img/1383571573.78.png", "name" : "Bulbasaur"},
-           { "sprite" : "http://pokeapi.co/media/img/24.png", "name" : "Arbok"},
-           { "sprite" : "http://pokeapi.co/media/img/1383571573.78.png", "name" : "Bulbasaur"}
-        ]},
-        {
-        "team_id" : "5",
-        "team" : [
-           { "sprite" : "http://pokeapi.co/media/img/1383571573.78.png", "name" : "Bulbasaur"},
-           { "sprite" : "http://pokeapi.co/media/img/24.png", "name" : "Arbok"},
-           { "sprite" : "http://pokeapi.co/media/img/1383571573.78.png", "name" : "Bulbasaur"},
-           { "sprite" : "http://pokeapi.co/media/img/1383571573.78.png", "name" : "Bulbasaur"},
-           { "sprite" : "http://pokeapi.co/media/img/24.png", "name" : "Arbok"},
-           { "sprite" : "http://pokeapi.co/media/img/1383571573.78.png", "name" : "Bulbasaur"}
-        ]},
-        {
-        "team_id" : "6",
-        "team" : [
-           { "sprite" : "http://pokeapi.co/media/img/1383571573.78.png", "name" : "Bulbasaur"},
-           { "sprite" : "http://pokeapi.co/media/img/24.png", "name" : "Arbok"},
-           { "sprite" : "http://pokeapi.co/media/img/1383571573.78.png", "name" : "Bulbasaur"},
-           { "sprite" : "http://pokeapi.co/media/img/1383571573.78.png", "name" : "Bulbasaur"},
-           { "sprite" : "http://pokeapi.co/media/img/24.png", "name" : "Arbok"},
-           { "sprite" : "http://pokeapi.co/media/img/1383571573.78.png", "name" : "Bulbasaur"}
-        ]}
+    vm.Teams = [];
 
-    ];
+
+    function loadTeams(){
+        database.getTeams(vm.User.username).then(
+            function (response) {
+              vm.Teams = response.data;
+              for (var i = 0; i < vm.Teams.length; ++i){
+                var team = vm.Teams[i];
+                console.log(team);
+                console.log(team.length);
+                for (var j = 0; j < team.length; ++j){
+                  team[j].sprite=pokeapi.getPokemonSpriteURLById(team[j].pokemon_id);
+                }
+              }
+              console.log(vm.Teams);
+
+            });
+    }
 
     vm.selectTeam = function(team_id){
       vm.SelectedTeam = team_id;
@@ -87,11 +43,19 @@
 
     }
 
+    vm.addNewTeam = function(){
+      $location.path("/new");
+    }
+
+
     function validateUser(){
         if ($cookies.get('PTLoggedIn') == 'true'){
           database.login($cookies.get('PTUsername'), $cookies.get('PTPassword')).then(
             function loginSucess(response) {
               if (response.data.status == 'success'){
+                vm.User.username = $cookies.get('PTUsername');
+                vm.User.password = $cookies.get('PTPassword');
+                loadTeams();
                 return true;
               }else{
                 $location.path('/login');

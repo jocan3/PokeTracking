@@ -1,0 +1,46 @@
+<md-content class="md-padding" ng-show="add.AllPokemon.pokemon.length > 0 && add.NumItems < 6">
+    <form ng-submit="$event.preventDefault()">
+      <md-autocomplete
+          md-no-cache="add.noCache"
+          md-selected-item="add.selectedItem"
+          md-search-text-change="add.searchTextChange(add.searchText)"
+          md-search-text="add.searchText"
+          md-selected-item-change="add.selectedItemChange(item)"
+          md-items="item in add.querySearch(add.searchText)"
+          md-item-text="item.name"
+          md-min-length="1"
+          placeholder="Type in a pokemon name">
+        <md-item-template>
+        <md-button class="md-fab md-mini md-primary" aria-label="item.name">
+            <md-icon md-font-icon="ion-plus-round" style="font-size:12px;"></md-icon>
+        </md-button>
+          <span md-highlight-text="add.searchText" md-highlight-flags="^i">{{item.name}}</span>
+
+        </md-item-template>
+        <md-not-found>
+          No results matching "{{add.searchText}}" were found.
+        </md-not-found>
+      </md-autocomplete>
+      <br/>
+    </form>
+  </md-content>
+  <div layout-align="center">
+  <md-content layout-padding>
+    <md-grid-list layout-align="center"
+        md-cols-gt-md="6" md-cols-sm="3" md-cols-md="6"
+        md-row-height-gt-md="1:1" md-row-height="4:3"
+        md-gutter-gt-md="16px" md-gutter-gt-sm="8px" md-gutter="4px">
+    <md-grid-tile ng-click="add.clickOnPokemon($index)" ng-repeat="pokemon in add.Team"
+                  md-rowspan-sm="1"
+                  md-colspan-sm="1">
+                
+      <img ng-src="{{pokemon.sprite}}" width="100%" height="100%" class="md-avatar" alt="{{pokemon.name}}">  
+      <md-grid-tile-footer><h3>{{pokemon.name}}</h3></md-grid-tile-footer>
+    </md-grid-tile>
+  </md-grid-list>
+  </md-content>
+</div>
+<md-content>
+  <md-button ng-click="add.submit()" ng-disabled="add.NumItems < 6" class="md-raised md-primary">Continue</md-button>
+</md-content>
+
