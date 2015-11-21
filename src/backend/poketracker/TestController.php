@@ -156,6 +156,53 @@ class TestController
         return array("status" => "success","msg" => "Logged in " . $username);
     }
 
+
+    /**
+     * Gets the user by id or current user
+     *
+     * @url GET /team/$id
+     */
+    public function getTeam($id)
+    {		
+	     $c = new Credentials();
+		
+		// Create connection
+		$conn = new mysqli($c->servername, $c->username, $c->password, $c->dbname);
+		// Check connection
+		if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+		} 
+
+		$result = array();
+		/* create a prepared statement */
+		if ($stmt = $conn->prepare("SELECT t.team_id, p.pokemon_id FROM team as t INNER JOIN pokemon as p ON t.team_id = p.team_id WHERE t.team_id=? ORDER BY t.team_id")) {
+
+			/* bind parameters for markers */
+			$stmt->bind_param("s", $id);
+
+			/* execute query */
+			$stmt->execute();
+
+			$resultset = new TeamsList();
+			/* bind result variables */
+			$stmt->bind_result($resultset->team_id, $resultset->pokemon_id);
+		   
+			/* fetch value */
+			$lastTeamId = -1;
+			$index = -1;
+		    while($stmt->fetch()){
+		    	
+		    	array_push($result, array("team_id" => $resultset->team_id, "pokemon_id" => $resultset->pokemon_id, "order" => ""));
+		    }
+
+			/* close statement */
+			$stmt->close();
+		}
+
+		return $result;
+	}
+
+
     /**
      * Gets the user by id or current user
      *
@@ -268,6 +315,8 @@ class TestController
     }
 
 
+	
+
 		/**
      * Create Account
      *
@@ -307,6 +356,71 @@ class TestController
         return array("status" => "success","msg" => "pkemon inserted successfully");
     }
 
+
+   
+
+    	/**
+     * Create Account
+     *
+     * @url GET /insertStat/$username/$userTeamId/$foeTeamId/$battleResult/$pokemonId1/$pokemonId2/$pokemonId3/$pokemonId4
+     */
+    public function insertStat($username, $userTeamId, $foeTeamId,$battleResult,$pokemonId1,$pokemonId2,$pokemonId3,$pokemonId4)
+    {
+
+	
+        $c = new Credentials();
+		
+		// Create connection
+		$conn = new mysqli($c->servername, $c->username, $c->password, $c->dbname);
+		// Check connection
+		if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+		} 
+
+
+		$result = -1;
+		/* create a prepared statement */
+		if ($stmt = $conn->prepare("SELECT MAX(stat_id) FROM statistic")) {
+
+			/* bind parameters for markers */
+			//$stmt->bind_param("s", $username);
+
+			/* execute query */
+			$stmt->execute();
+
+			/* bind result variables */
+			$stmt->bind_result($result);
+
+			/* fetch value */
+		    $stmt->fetch();
+			/* close statement */
+			$stmt->close();
+		}
+		
+		$result++;
+
+
+
+		/* create a prepared statement */
+		if ($stmt = $conn->prepare("INSERT INTO statistic VALUES(?,?,?,?,?,?,?,?,?)")) {
+
+			/* bind parameters for markers */
+			$stmt->bind_param("isiisiiii", $result, $username, $userTeamId, $foeTeamId,$battleResult,$pokemonId1,$pokemonId2,$pokemonId3,$pokemonId4);
+
+			/* execute query */
+			
+ 
+			/* fetch value */
+		    if (!$stmt->execute()){
+			    $stmt->close();
+				return array("status" => "error","msg" => "There was an error when inserting into the stats");
+			}
+			/* close statement */
+			$stmt->close();
+		}
+		
+        return array("status" => "success","msg" => "stat inserted successfully");
+    }
 
 
 

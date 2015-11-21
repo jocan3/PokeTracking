@@ -136,7 +136,6 @@ section.jumbotron {
 
 .mainTeams{
   width: 40%;
-  max-height: 35em;
   overflow-x:hidden;
   overflow-y:scroll;
 }
@@ -144,8 +143,6 @@ section.jumbotron {
 .pokeImg {
   /*background-color: #f76a65;*/
   background-image: url("components/images/logo/blue2.png");
-  border-style: double;
-  border-color: white;
   background-size:100%;
   width: 15%;
   height: 15%
@@ -156,11 +153,16 @@ section.jumbotron {
 .mainTeams > md-list > md-list-item:hover{
   background-color: #ECFAFB;
 }
-/*
+
 .teamSelected {
   background-color: #B2EBFF !important;
-  border-radius: 2px; 
-  }*/
+
+  }
+
+
+  *:focus {
+    outline: none;
+  }
 
 
 @media screen and (max-width: 768px) {
@@ -179,6 +181,7 @@ section.jumbotron {
     }    
 
     .mainTeams{
+      max-height: 35em;
       width: 100%;
     }
 
@@ -194,6 +197,7 @@ section.jumbotron {
     .mainContent{
       display: block;
     }
+
 
 
 

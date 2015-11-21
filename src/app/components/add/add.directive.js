@@ -83,13 +83,8 @@
                   vm.Team[vm.TeamIndex].name = item.name;
                   vm.Team[vm.TeamIndex].pokemon_id = response.data.national_id;
                   console.log(response.data);
-
-                  pokeapi.getSprite(response.data.sprites[0].resource_uri).then(
-                      function (response){
-                          console.log(response.data);
-                          vm.Team[vm.TeamIndex].sprite = pokeapi.apiHost + response.data.image;
-                      }
-                  );
+                  vm.Team[vm.TeamIndex].sprite=pokeapi.getPokemonSpriteURLById(vm.Team[vm.TeamIndex].pokemon_id);  
+                  vm.searchText = '';
                   ++vm.NumItems;
                   console.log(vm.Team)
                 });

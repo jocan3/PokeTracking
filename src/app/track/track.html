@@ -1,0 +1,32 @@
+<menu-dir></menu-dir>
+<div layout-align="center" id="trackContent">
+	<md-subheader class="md-primary">Put the order you choose</md-subheader>
+  <md-content layout-padding>
+    <md-grid-list layout-align="center"
+        md-cols-gt-md="6" md-cols-sm="3" md-cols-md="6"
+        md-row-height-gt-md="1:1" md-row-height="1:1"
+        md-gutter-gt-md="16px" md-gutter-gt-sm="8px" md-gutter="4px">
+    <md-grid-tile ng-click="track.clickOnPokemon($index)" ng-repeat="pokemon in track.Team"
+                  md-rowspan-sm="1"
+                  md-colspan-sm="1">
+                
+      <img ng-src="{{pokemon.sprite}}" width="100%" height="100%" class="md-avatar" alt="{{pokemon.name}}">  
+      <md-grid-tile-footer><h3>{{pokemon.order}}</h3></md-grid-tile-footer>
+    </md-grid-tile>
+  </md-grid-list>
+  </md-content>
+  <md-content>
+  <md-subheader class="md-primary">What was the result of the battle?</md-subheader>
+    <md-radio-group ng-model="track.Result">
+      <md-radio-button value="win" class="md-primary">I won!</md-radio-button>
+      <md-radio-button value="loose">I lost</md-radio-button>
+      <md-radio-button value="draw">It was a draw</md-radio-button>
+      <md-radio-button value="undefined">I don't know</md-radio-button>
+    </md-radio-group>
+</md-content>
+<md-content>
+  <md-button ng-click="track.submit($event)" ng-disabled="track.TeamIndex < 5 || track.Result == undefined" class="md-raised md-primary">Save</md-button>
+</md-content>
+</div>
+
+

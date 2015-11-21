@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, $cookies, $location, database, pokeapi) {
+  function MainController($timeout, $cookies, $location, database, pokeapi,$mdDialog) {
     var vm = this;
 
     vm.awesomeThings = [];
@@ -18,6 +18,19 @@
    
 
     vm.Teams = [];
+
+    vm.showMessage = function() {
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('.mainContent')))
+        .clickOutsideToClose(false)
+        .title('No team has been selected!')
+        .content('Please click on one of your teams before start tracking.')
+        .ariaLabel('Alert Dialog Demo')
+        .ok('Got it!')
+        //.targetEvent(ev)
+    );
+  };
 
 
     function loadTeams(){
@@ -47,6 +60,13 @@
       $location.path("/new");
     }
 
+    vm.startTracking = function(){
+      if (vm.SelectedTeam == undefined){
+        vm.showMessage();
+      }else{
+        $location.path("/oponent/"+ vm.SelectedTeam);
+      }
+    }
 
     function validateUser(){
         if ($cookies.get('PTLoggedIn') == 'true'){

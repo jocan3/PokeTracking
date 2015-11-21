@@ -25,6 +25,10 @@
       var vm = this;
       vm.showLogout = $cookies.get('PTLoggedIn') == 'true';
 
+      vm.goToHome = function(){
+        $location.path("/");
+      }
+
       vm.logout = function(){
         $cookies.remove('PTLoggedIn');
         $cookies.remove('PTPassword');

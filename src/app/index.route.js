@@ -17,6 +17,16 @@
         controller: 'LoginController',
         controllerAs: 'login'
       })
+      .when('/track/:myTeam/:foeTeam', {
+        templateUrl: 'app/track/track.html',
+        controller: 'TrackController',
+        controllerAs: 'track'
+      })
+       .when('/oponent/:myTeam', {
+        templateUrl: 'app/oponent/oponent.html',
+        controller: 'OponentController',
+        controllerAs: 'oponent'
+      })
       .when('/new', {
         templateUrl: 'app/new/new.html',
         controller: 'NewController',

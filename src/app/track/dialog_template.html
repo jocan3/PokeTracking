@@ -1,0 +1,17 @@
+<div  ng-show="parentScope.Saving" layout="row" layout-sm="column" layout-align="space-around">
+    <p>Saving ...</p>
+    <br/>
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+  </div>
+<div ng-show="parentScope.Saved">
+<md-dialog-content> 
+<div class="md-dialog-content">
+<p>Your track was saved successfully!</p>
+</div>
+</md-dialog-content>
+ <md-dialog-actions layout="row" layout-align="center">
+      <md-button ng-click="closeDialog()">
+       Ok
+      </md-button>
+    </md-dialog-actions>
+  </div>

@@ -15,9 +15,10 @@
       createAccount: createAccount,
       login: login,
       getTeams: getTeams,
+      getTeam: getTeam,
       createTeam : createTeam,
-      insertInTeam : insertInTeam
-
+      insertInTeam : insertInTeam,
+      insertStat : insertStat
       //getTeams: getTeams,
       //getStatistics: getStatistics
     };
@@ -35,8 +36,20 @@
     }
 
 
+    function insertInTeam(teamId, pokemonId){
+      return $http.get(baseURL + 'insertInTeam/'+teamId + '/' + pokemonId);  
+    }
+
+    function insertStat(username,userTeamId,foeTeamId,battleResult,pokemonId1,pokemonId2,pokemonId3,pokemonId4){
+      return $http.get(baseURL + 'insertStat/'+username + '/' + userTeamId+ '/' + foeTeamId+ '/' + battleResult+ '/' + pokemonId1+ '/' + pokemonId2+ '/' + pokemonId3+ '/' + pokemonId4);  
+    }
+
     function getTeams(username){
       return $http.get(baseURL + 'teams/'+username);
+    }
+
+    function getTeam(teamId){
+      return $http.get(baseURL + 'team/'+teamId);
     }
 
 

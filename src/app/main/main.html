@@ -3,7 +3,7 @@
 
  <md-content class="mainButtons" layout-align="left">
 <md-card>
-  <img ng-src="app/components/images/vgc_2015_battle.jpg" alt="vgc_2015_battle"  class="md-card-image">
+  <img ng-click="main.startTracking()" ng-src="app/components/images/vgc_2015_battle.jpg" alt="vgc_2015_battle"  class="md-card-image">
   <md-card-content>
           <h4 class="md-title">Track your battles!</h4>
           <p>Record the results of your VGC battles with you favorite teams</p>
@@ -38,8 +38,8 @@
     </md-radio-group-->
 
 <md-list>
-      <md-list-item class="md-3-line" ng-class="{'teamSelected' : main.SelectedTeam == team.team_id}"  ng-repeat="team in main.Teams" ng-click="main.selectTeam(team.team_id)" aria-label="team_$index">
-         <img class="pokeImg" ng-repeat="pokemon in team" ng-src="{{pokemon.sprite}}" class="md-avatar" alt="{{pokemon.name}}">  
+      <md-list-item class="md-3-line" ng-repeat="team in main.Teams"  aria-label="team_$index" ng-class="{'teamSelected' : main.SelectedTeam == team[0].team_id}">
+         <img class="pokeImg" ng-repeat="pokemon in team" ng-src="{{pokemon.sprite}}" class="md-avatar" alt="{{pokemon.name}}" ng-click="main.selectTeam(team[0].team_id)" >  
       </md-list-item>
       <md-divider ></md-divider>
 
