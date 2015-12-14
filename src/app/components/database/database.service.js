@@ -8,7 +8,8 @@
   /** @ngInject */
   function database($log, $resource, $http) {
     var apiHost = 'data/';
-    var baseURL = 'http://localhost:8080/poketracker/';
+    //var baseURL = 'http://localhost:8080/poketracker/';
+var baseURL = window.location.protocol + '//' + window.location.hostname + '/poketracker-service/';
 
     var service = {
       apiHost: apiHost,

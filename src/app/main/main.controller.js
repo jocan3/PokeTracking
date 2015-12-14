@@ -32,6 +32,19 @@
     );
   };
 
+  vm.showMessageStat = function() {
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('.mainContent')))
+        .clickOutsideToClose(false)
+        .title('Functionality in progress!')
+        .content(':( ..this functionality is not available at the moment.')
+        .ariaLabel('Alert Dialog Stat')
+        .ok('Got it!')
+        //.targetEvent(ev)
+    );
+  };
+
 
     function loadTeams(){
         database.getTeams(vm.User.username).then(

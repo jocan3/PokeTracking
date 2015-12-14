@@ -36,6 +36,19 @@
         $location.path("/login");
       }
 
+      vm.about = function(){
+        $mdDialog.show(
+          $mdDialog.alert()
+            .parent(angular.element(document.querySelector('body')))
+            .clickOutsideToClose(false)
+            .title('PokeTracker v1.0 - Created by: Jocan3')
+            .content('Keep track of your Pokemon VGC Battles and use your statistics to get suggestions about what Pokemon and what order to use.')
+            .ariaLabel('Alert Dialog About')
+            .ok('Ok')
+            //.targetEvent(ev)
+        );
+      };
+
       // "vm.creation" is avaible by directive option "bindToController: true"
       //vm.relativeDate = moment(vm.creationDate).fromNow();
     }
